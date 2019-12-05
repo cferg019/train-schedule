@@ -1,0 +1,25 @@
+
+.jumbotron {
+    text-align: center;
+    /* background: navy;
+    color: white; */
+    font-size: 64px;
+    padding: 20px 0 20px 0 ;
+}
+
+.card-header {
+    background-color: lightgray;
+    font-weight: bold;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    padding: 6px 20px;
+}
+
+button {
+    margin: 0 0 10px 20px;
+}
