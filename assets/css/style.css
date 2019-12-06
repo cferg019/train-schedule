@@ -1,15 +1,29 @@
+body {
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'Solway', serif;
+    color: #3f681c;
 
+}
 .jumbotron {
     text-align: center;
-    /* background: navy;
-    color: white; */
-    font-size: 64px;
-    padding: 20px 0 20px 0 ;
+    color: #ffbb00;
+    padding: 20px 0 20px 0;
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 10px 0;
+}
+
+h1 {
+    font-size: 80px;
+    font-weight: bold;
+    font-family: 'Solway', serif;
+    text-shadow: -1.5px -1.5px 0 #fb6542, 1.5px -1.5px 0 #fb6542, -1.5px 1.5px 0 #fb6542, 1.5px 1.5px 0 #fb6542
 }
 
 .card-header {
-    background-color: lightgray;
-    font-weight: bold;
+    background-color: #3f681c;
+    font-weight: bolder;
+    color: white;
 }
 
 .card {
@@ -20,6 +34,25 @@
     padding: 6px 20px;
 }
 
-button {
+/* button {
     margin: 0 0 10px 20px;
+    color: #3f681c;
+} */
+
+.btn-outline-secondary {
+    margin: 0 0 10px 20px;
+    color: #3f681c;
+    border-color: #3f681c;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #3f681c;
+    color: white;
+    border-color: #3f681c;
+
+}
+
+.table {
+    background-color: white;
+    color: #3f681c;
 }

@@ -56,9 +56,6 @@ database.ref().on("child_added", function (snapshot) {
     var startTime = snapshot.val().startTime;
     var frequency = snapshot.val().frequency;
 
-
-                // var startTimePretty = moment.unix(startTime).format("LT");
-
     // First Time (pushed back 1 year to make sure it comes before current time)
     var firstTimeConverted = moment(startTime, "HH:mm").subtract(1, "years");
     console.log(firstTimeConverted);
