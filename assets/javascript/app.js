@@ -14,51 +14,85 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
-$(document).ready(function () {
-    $("#addTrainButton").click(function (event) {
-        event.preventDefault();
-        console.log($("#startDateInput").val().trim())
-        var name = $("#trainNameInput").val().trim();
-        var destination = $("#destinationInput").val().trim();
-        var startTime = moment($("#startTimeInput").val().trim()).format("X");
-        var frequency = $("#frequencyInput").val().trim();
 
 
+$("#addTrainButton").click(function (event) {
+    event.preventDefault();
+    console.log($("#trainNameInput").val().trim())
 
-        $("#trainNameInput").val("")
-        $("#destinationInput").val("");
-        $("#startTimeInput").val("");
-        $("#frequencyInput").val("");
+    const time = $("#startTimeInput").val().trim()
+    console.log(time)
+    const hours = time.split(':')[0]
+    const minutes = time.split(':')[1]
 
-        database.ref().push({
-            name: name,
-            destination: destination,
-            startTime: startTime,
-            frequency: frequency
-        });
+    var name = $("#trainNameInput").val().trim();
+    var destination = $("#destinationInput").val().trim();
+    var startTime = moment().set('hour', hours).set('minute', minutes).format("hh:mm")
+    var frequency = $("#frequencyInput").val().trim();
 
-    });
+    console.log(startTime)
 
+    var newTrain = {
+        name: name,
+        destination: destination,
+        startTime: startTime,
+        frequency: frequency,
+    };
 
-    database.ref().on("child_added", function (snapshot) {
-        console.log(snapshot.val());
+    database.ref().push(newTrain);
 
-        var name = snapshot.val().name;
-        var destination = snapshot.val().destination;
-        var startTime = snapshot.val().startTime;
-        var frequency = snapshot.val().frequency;
-
-        // use template strings to efficiently build your new row
-        var markup = `
-            <tr>
-                <td>${name}</td>
-                <td>${destination}</td>
-                <td>${frequency}</td>
-                <td>${startTime}</td>
-                <td></td>
-            </tr>
-            `
-        $("#tableBody").append(markup);
-    });
-
+    $("#trainNameInput").val("")
+    $("#destinationInput").val("");
+    $("#startTimeInput").val("");
+    $("#frequencyInput").val("");
 });
+
+
+database.ref().on("child_added", function (snapshot) {
+    console.log(snapshot.val());
+
+    var name = snapshot.val().name;
+    var destination = snapshot.val().destination;
+    var startTime = snapshot.val().startTime;
+    var frequency = snapshot.val().frequency;
+
+
+                // var startTimePretty = moment.unix(startTime).format("LT");
+
+    // First Time (pushed back 1 year to make sure it comes before current time)
+    var firstTimeConverted = moment(startTime, "HH:mm").subtract(1, "years");
+    console.log(firstTimeConverted);
+
+    // Current Time
+    var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+    // Difference between the times
+    var timeDifference = moment().diff(moment(firstTimeConverted), "minutes");
+    console.log("DIFFERENCE IN TIME: " + timeDifference);
+
+    // Time apart (remainder)
+    var minutesLeftCalculation = timeDifference % frequency;
+    console.log(minutesLeftCalculation);
+
+    // Minute Until Train
+    var tMinutesTillTrain = frequency - minutesLeftCalculation;
+    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+    // Next Train
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    var nextTrainPretty = moment(nextTrain).format("hh:mm");
+    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+
+
+    var markup = $("<tr>").append(
+        $("<td>").text(name),
+        $("<td>").text(destination),
+        $("<td>").text(frequency),
+        $("<td>").text(nextTrainPretty),
+        $("<td>").text(tMinutesTillTrain),
+    );
+
+    $("#tableBody").append(markup);
+});
+
