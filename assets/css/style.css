@@ -1,20 +1,21 @@
 body {
-    /* font-family: 'Roboto', sans-serif; */
     font-family: 'Solway', serif;
     color: #3f681c;
+    background-image: url("../images/hatchTransparent45.png");
+    background-position: center center;
 
 }
 .jumbotron {
     text-align: center;
     color: #ffbb00;
     padding: 20px 0 20px 0;
-    background-color: white;
+    background-color: transparent;
     margin-bottom: 10px;
     padding: 10px 0;
 }
 
 h1 {
-    font-size: 80px;
+    font-size: 85px;
     font-weight: bold;
     font-family: 'Solway', serif;
     text-shadow: -1.5px -1.5px 0 #fb6542, 1.5px -1.5px 0 #fb6542, -1.5px 1.5px 0 #fb6542, 1.5px 1.5px 0 #fb6542
@@ -28,16 +29,13 @@ h1 {
 
 .card {
     margin-bottom: 20px;
+    border-color: #3f681c;
+    font-size: 14px;
 }
 
 .form-group {
     padding: 6px 20px;
 }
-
-/* button {
-    margin: 0 0 10px 20px;
-    color: #3f681c;
-} */
 
 .btn-outline-secondary {
     margin: 0 0 10px 20px;
@@ -49,10 +47,30 @@ h1 {
     background-color: #3f681c;
     color: white;
     border-color: #3f681c;
+}
 
+th {
+    border: none;
+    background-color: #375e97;
+    color: white;
+}
+
+tr {
+    background-color: white;
+    color: #375e97;
+    border-left: thin white;
+}
+
+tr:hover {
+    background-color: #375e97;
+    color: white;
+}
+
+.tableCard {
+    border-color: #375e97;
+    align-content: center;
 }
 
 .table {
-    background-color: white;
-    color: #3f681c;
+    margin: 1px 1px 1px 1px;
 }
